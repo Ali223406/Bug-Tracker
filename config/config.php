@@ -1,10 +1,14 @@
 <?php
-//connexion a la base de données
+$host = 'localhost';     // serveur local
+$dbname = 'bugtracker';  // nom de ta base de données
+$username = 'root';      // par défaut XAMPP
+$password = '';          // par défaut XAMPP
+$charset = 'utf8mb4';
+
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=bugtracker', 'root', '');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-    $pdo->exec("SET CHARACTER SET utf8");
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=$charset", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Could not connect to the database "   . $e->getMessage());
+    die("Could not connect to the database: " . $e->getMessage());
 }
 ?>
